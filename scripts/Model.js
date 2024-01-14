@@ -1,4 +1,4 @@
-class Obeservable {
+class Observable {
     constructor() {
         this.handlers = [];
     }
@@ -18,20 +18,16 @@ class Obeservable {
         }
     }
 }
-class Colors extends Obeservable {
+class Colors extends Observable {
     constructor() {
         super();
         this.list = [];
-        let possibleColorCount = 256 * 256 * 256;
-        this.big = new Array(possibleColorCount);
-        for (let i = 0; i < possibleColorCount; i++) {
-            this.big[i] = i.toString(16);
-        }
+        this.hashList = {};
 
     }
-    addColor(color, index) {
+    addColor(color) {
         this.list.push(color);
-        this.big.splice()
+        this.hashList[color.rgb] = true;
 
         this.publish(this, "newColor");
     }
@@ -41,6 +37,7 @@ class Colors extends Obeservable {
                 return item;
             }
         });
+        this.hashList[color.rgb] = true;
         this.publish(this, "removeColor");
     }
     changeColor(oldColor, newColor) {

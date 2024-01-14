@@ -2,8 +2,8 @@ model = new Colors();
 view = new ModelViewer(model);
 save = new StorageSaver("colors", model);
 
-function next(color, index) {
-    model.addColor(color, index);
+function next(color) {
+    model.addColor(color);
 }
 
 function rgbToHex(r, g, b) {

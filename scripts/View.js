@@ -13,21 +13,15 @@ class ModelViewer {
 
         var isNew = false;
         var newColor = "";
-
-        let index = Math.round(Math.random() * obj.big.length);
-        newColor = obj.big[index];
-        //console.log(newColor, obj.big, index);
-        for (let i = newColor.length; i < 6; i++) {
-            newColor = "0" + newColor;
+        while(!isNew){
+            newColor = this.createNewColor();
+            isNew = this.checkColor(newColor); 
         }
-        newColor = "#" + newColor;
-        let rgb = hexToRgb(newColor);
-        newColor = "rgb(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ")";
 
 
-        this.createInputCard(newColor, index);
+        this.createInputCard(newColor);
     }
-    createInputCard(newColor, index) {
+    createInputCard(newColor) {
 
 
         let card = document.createElement("div");
@@ -46,7 +40,7 @@ class ModelViewer {
             if (e.code === "Enter" && input.value) {
 
                 let color = new Color(input.value, newColor);
-                next(color, index);
+                next(color);
 
 
 
