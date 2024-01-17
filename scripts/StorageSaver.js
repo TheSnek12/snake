@@ -11,7 +11,13 @@ class StorageSaver {
                 this.model.addColor(color);
             }
         } else {
-            this.model.publish(this.model, "start");
+            var isNew = false;
+            var newColor = "";
+            while(!isNew){
+                newColor = createNewColor();
+                isNew = checkColor(newColor); 
+            }
+            this.model.addColor(new inputColor(newColor));
         }
 
     }

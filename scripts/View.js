@@ -11,67 +11,11 @@ class ModelViewer {
         }
 
 
-        var isNew = false;
-        var newColor = "";
-        while(!isNew){
-            newColor = this.createNewColor();
-            isNew = this.checkColor(newColor); 
-        }
-
-
-        this.createInputCard(newColor);
-    }
-    createInputCard(newColor) {
-
-
-        let card = document.createElement("div");
-        card.className = "colorItem";
-
-
-        let heading = document.createElement("h2");
-        heading.textContent = newColor.substring(4, newColor.length - 1);
-
-        let colorBlock = document.createElement("div");
-        colorBlock.className = "colorBlock";
-        colorBlock.style.backgroundColor = newColor;
-
-        let input = document.createElement("input");
-        input.addEventListener("keydown", function(e) {
-            if (e.code === "Enter" && input.value) {
-
-                let color = new Color(input.value, newColor);
-                next(color);
-
-
-
-            }
-
-        });
-
-
-        card.append(heading);
-        card.append(colorBlock);
-        card.append(input);
-
-        list.append(card);
-        input.focus();
-        input.select();
-
-    }
-    createNewColor() {
-        let rand = Math.round(Math.random() * 255);
-        let rand2 = Math.round(Math.random() * 255);
-        let rand3 = Math.round(Math.random() * 255);
-
-        let newColor = "rgb(" + rand + ", " + rand2 + ", " + rand3 + ")";
-
-        return newColor;
 
 
     }
-    checkColor(newColor) {
-        return !this.model.hashList[newColor];
-    }
+
+
     createCard(color) {
         let card = document.createElement("div");
         card.className = "colorItem";
@@ -83,16 +27,44 @@ class ModelViewer {
         let colorBlock = document.createElement("div");
         colorBlock.className = "colorBlock";
         colorBlock.style.backgroundColor = color.rgb;
-
-        let nameText = document.createElement("div");
-        nameText.className = "text";
-        nameText.textContent = color.name;
-
         card.append(heading);
         card.append(colorBlock);
-        card.append(nameText);
+        if (color.name){
+            let nameText = document.createElement("div");
+            nameText.className = "text";
+            nameText.textContent = color.name;
+            card.append(nameText);
+            list.append(card);
+        }
+        else{
+            let input = document.createElement("input");
+            input.addEventListener("keydown", function(e) {
+                if (e.code === "Enter" && input.value) {
+                    let c = new Color(input.value, color.rgb);
+                    model.addColor(c);
 
-        list.append(card);
+                    var isNew = false;
+                    var newColor = "";
+                    while(!isNew){
+                        newColor = createNewColor();
+                        isNew = checkColor(newColor); 
+                    }
+                    
+                    model.addColor(new inputColor(newColor));
+                    
+                    model.removeColor(color);
+                }
+            });      
+            card.append(input);
+            list.append(card);
+            input.focus();
+            
+            
+        }
+
+
+
+        
 
     }
 }

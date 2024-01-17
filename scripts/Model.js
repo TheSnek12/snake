@@ -53,3 +53,8 @@ class Color {
         this.rgb = rgb;
     }
 }
+class inputColor {
+    constructor(rgb){
+        this.rgb = rgb;
+    }
+}

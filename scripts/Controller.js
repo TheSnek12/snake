@@ -2,14 +2,25 @@ model = new Colors();
 view = new ModelViewer(model);
 save = new StorageSaver("colors", model);
 
-function next(color) {
-    model.addColor(color);
-}
 
 function rgbToHex(r, g, b) {
     return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
 }
+function createNewColor() {
+        let rand = Math.round(Math.random() * 255);
+        let rand2 = Math.round(Math.random() * 255);
+        let rand3 = Math.round(Math.random() * 255);
 
+        let newColor = "rgb(" + rand + ", " + rand2 + ", " + rand3 + ")";
+
+        return newColor;
+
+
+}
+
+function checkColor(newColor) {
+        return !model.hashList[newColor];
+}
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
