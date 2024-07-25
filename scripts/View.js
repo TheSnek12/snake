@@ -57,6 +57,7 @@ class ModelViewer {
                 
             });  
             let enter = document.createElement("button")
+            enter.textContent = "Enter"
             enter.addEventListener("click", function(e) {
                 if (input.value) {
                     let c = new Color(input.value, color.rgb);

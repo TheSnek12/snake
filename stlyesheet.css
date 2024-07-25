@@ -6,6 +6,11 @@ body {
     color: white;
 }
 
+button{
+    width: 150px;
+    margin-top: 5px;
+}
+
 .topbar {
     position: relative;
     top: -10px;
