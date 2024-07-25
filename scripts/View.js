@@ -54,8 +54,29 @@ class ModelViewer {
                     
                     model.removeColor(color);
                 }
-            });      
+                
+            });  
+            let enter = document.createElement("button")
+            enter.addEventListener("click", function(e) {
+                if (input.value) {
+                    let c = new Color(input.value, color.rgb);
+                    model.addColor(c);
+
+                    var isNew = false;
+                    var newColor = "";
+                    while(!isNew){
+                        newColor = createNewColor();
+                        isNew = checkColor(newColor); 
+                    }
+                    
+                    model.addColor(new inputColor(newColor));
+                    
+                    model.removeColor(color);
+                }
+                }
+            });
             card.append(input);
+            card.append(enter);
             list.append(card);
             input.focus();
             
