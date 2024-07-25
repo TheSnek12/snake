@@ -73,7 +73,7 @@ class ModelViewer {
                     
                     model.removeColor(color);
                 }
-                }
+                
             });
             card.append(input);
             card.append(enter);
